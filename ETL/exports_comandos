@@ -1,0 +1,17 @@
+##Declarantes
+mongoexport --uri="mongodb://load:load@<host>/dataton2021" --collection=declaraciones --type=csv --fields='declaracion.situacionPatrimonial.datosGenerales.curp,declaracion.situacionPatrimonial.datosGenerales.nombre,declaracion.situacionPatrimonial.datosGenerales.primerApellido,declaracion.situacionPatrimonial.datosGenerales.segundoApellido' --out=dataton2021/datosTratados/declarantes.csv
+
+##Sancionados
+mongoexport --uri="mongodb://load:load@<host>/dataton2021" --collection=sancionados --type=csv --fields='servidorPublicoSancionado.curp,tipoFalta.descripcion' --out=dataton2021/datosTratados/sancionados.csv
+
+##ingresos
+mongoexport --uri="mongodb://load:load@<host>/dataton2021" --collection=declaraciones --type=csv --fields='declaracion.situacionPatrimonial.datosGenerales.curp,declaracion.situacionPatrimonial.ingresos.actividadFinanciera.remuneracionTotal.valor,declaracion.situacionPatrimonial.ingresos.actividadFinanciera.remuneracionTotal.moneda,declaracion.situacionPatrimonial.ingresos.actividadIndustrialComercialEmpresarial.remuneracionTotal.valor,declaracion.situacionPatrimonial.ingresos.actividadIndustrialComercialEmpresarial.remuneracionTotal.moneda,declaracion.situacionPatrimonial.ingresos.ingresoMensualNetoDeclarante.valor,declaracion.situacionPatrimonial.ingresos.ingresoMensualNetoDeclarante.moneda,declaracion.situacionPatrimonial.ingresos.ingresoAnualNetoDeclarante.valor,declaracion.situacionPatrimonial.ingresos.ingresoAnualNetoDeclarante.moneda,declaracion.situacionPatrimonial.ingresos.ingresoConclusionNetoDeclarante.valor,declaracion.situacionPatrimonial.ingresos.ingresoConclusionNetoDeclarante.moneda,declaracion.situacionPatrimonial.ingresos.actividadFinanciera.otrosIngresos.valor,declaracion.situacionPatrimonial.ingresos.otrosIngresos.remuneracionTotal.moneda,declaracion.situacionPatrimonial.ingresos.serviciosProfesionales.remuneracionTotal.valor,declaracion.situacionPatrimonial.ingresos.serviciosProfesionales.remuneracionTotal.moneda' --out=dataton2021/datosTratados/ingresos.csv
+
+##IngresosNetos
+mongoexport --uri="mongodb://load:load@<host>/dataton2021" --collection=declaraciones --type=csv --fields='declaracion.situacionPatrimonial.datosGenerales.curp,declaracion.situacionPatrimonial.ingresos.totalIngresosAnualesNetos.valor' --out=dataton2021/datosTratados/ingresosNetos.csv
+
+##Ingesta PostgreSQL
+psql postgresql://<usser>:<pwd>@<host>/bdttn01 -c "COPY dttn.cat_funcionarios FROM stdin WITH CSV DELIMITER ',' QUOTE '\"';" < /ruta/al/declarantes.csv
+psql postgresql://<usser>:<pwd>@<host>/bdttn01 -c "COPY dttn.cat_sancionados FROM stdin WITH CSV DELIMITER ',' QUOTE '\"';" < /ruta/al/sancionados.csv
+psql postgresql://<usser>:<pwd>@<host>/bdttn01 -c "COPY dttn.ingresos FROM stdin WITH CSV DELIMITER ',' QUOTE '\"';" < /ruta/al/ingresos.csv
+psql postgresql://<usser>:<pwd>@<host>/bdttn01 -c "COPY dttn.ingresosnetos FROM stdin WITH CSV DELIMITER ',' QUOTE '\"';" < /ruta/al/ingresosNetos.csv
