@@ -1,0 +1,943 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "iteration": 1638736629669,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "EnTypS2nk"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT COUNT(*) FROM dttn.trainsetclases WHERE clase = $clase;\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Conteo de Sancionados",
+      "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 51,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1
+          },
+          "mappings": [],
+          "max": 125,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "bucketOffset": 0,
+        "combine": true,
+        "legend": {
+          "calcs": [
+            "min",
+            "mean",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      },
+      "pluginVersion": "8.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "EnTypS2nk"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n$ingreso as value\nFROM dttn.trainsetclases\nwhere clase = $clase;\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "EnTypS2nk"
+          },
+          "format": "table",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n$ingreso as value\nFROM dttn.trainsetclases\nwhere clase = $clase;\n",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Distribución de Ingreso Mensual Por tipo de Falta",
+      "transparent": true,
+      "type": "histogram"
+    },
+    {
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 6
+      },
+      "id": 6,
+      "options": {
+        "border": {
+          "show": false,
+          "color": "yellow",
+          "size": 1
+        },
+        "fieldSets": [
+          {
+            "col": 1,
+            "color": "#F2495C",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          },
+          {
+            "col": 2,
+            "color": "#73BF69",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          },
+          {
+            "col": 3,
+            "color": "#5794F2",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          }
+        ],
+        "grid": {
+          "color": "#00000000"
+        },
+        "legend": {
+          "show": true,
+          "size": 2
+        },
+        "rotateYAxisTitle": true,
+        "xAxis": {
+          "col": 0,
+          "inverted": false
+        },
+        "xAxisExtents": {
+          "min": null,
+          "max": null
+        },
+        "xAxisTitle": {
+          "text": "",
+          "color": "white",
+          "textSize": 2
+        },
+        "yAxisExtents": {
+          "min": 0,
+          "max": null
+        },
+        "yAxisTitle": {
+          "text": "Pesos",
+          "color": "#777",
+          "textSize": 1
+        }
+      },
+      "pluginVersion": "8.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "EnTypS2nk"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  id, financieramed as fm, netomed as nm, netdev as nd\nFROM dttn.train_stdev\nWHERE clase = $clase\nORDER by id;\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Dispersión de ingresos por Actividad Financiera",
+      "type": "michaeldmoore-scatter-panel"
+    },
+    {
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 6
+      },
+      "id": 7,
+      "options": {
+        "border": {
+          "show": false,
+          "color": "yellow",
+          "size": 1
+        },
+        "fieldSets": [
+          {
+            "col": 1,
+            "color": "#F2495C",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          },
+          {
+            "col": 2,
+            "color": "#73BF69",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          },
+          {
+            "col": 3,
+            "color": "#5794F2",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          }
+        ],
+        "grid": {
+          "color": "#00000000"
+        },
+        "legend": {
+          "show": true,
+          "size": 2
+        },
+        "rotateYAxisTitle": true,
+        "xAxis": {
+          "col": 0,
+          "inverted": false
+        },
+        "xAxisExtents": {
+          "min": null,
+          "max": null
+        },
+        "xAxisTitle": {
+          "text": "",
+          "color": "white",
+          "textSize": 2
+        },
+        "yAxisExtents": {
+          "min": null,
+          "max": null
+        },
+        "yAxisTitle": {
+          "text": "Pesos",
+          "color": "#777",
+          "textSize": 1
+        }
+      },
+      "pluginVersion": "8.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "EnTypS2nk"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  id, comercialmed as cm, netomed as nm, netdev as nd\nFROM dttn.train_stdev\nWHERE clase = $clase\nORDER by id;\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Dispersión de ingresos por Actividad Comercial",
+      "type": "michaeldmoore-scatter-panel"
+    },
+    {
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 12
+      },
+      "id": 8,
+      "options": {
+        "border": {
+          "show": false,
+          "color": "yellow",
+          "size": 1
+        },
+        "fieldSets": [
+          {
+            "col": 1,
+            "color": "#F2495C",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          },
+          {
+            "col": 2,
+            "color": "#73BF69",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          },
+          {
+            "col": 3,
+            "color": "#5794F2",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          }
+        ],
+        "grid": {
+          "color": "#00000000"
+        },
+        "legend": {
+          "show": true,
+          "size": 2
+        },
+        "rotateYAxisTitle": true,
+        "xAxis": {
+          "col": 0,
+          "inverted": false
+        },
+        "xAxisExtents": {
+          "min": null,
+          "max": null
+        },
+        "xAxisTitle": {
+          "text": "",
+          "color": "white",
+          "textSize": 2
+        },
+        "yAxisExtents": {
+          "min": null,
+          "max": null
+        },
+        "yAxisTitle": {
+          "text": "Pesos",
+          "color": "#777",
+          "textSize": 1
+        }
+      },
+      "pluginVersion": "8.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "EnTypS2nk"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  id, profesionalesmed as pm, netomed as nm, netdev as nd\nFROM dttn.train_stdev\nWHERE clase = $clase\nORDER by id;\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Dispersión de ingresos por Servicios Profesionales",
+      "type": "michaeldmoore-scatter-panel"
+    },
+    {
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 12
+      },
+      "id": 9,
+      "options": {
+        "border": {
+          "show": false,
+          "color": "yellow",
+          "size": 1
+        },
+        "fieldSets": [
+          {
+            "col": 1,
+            "color": "#F2495C",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          },
+          {
+            "col": 2,
+            "color": "#73BF69",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          },
+          {
+            "col": 3,
+            "color": "#5794F2",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 2,
+            "lineType": "linear"
+          }
+        ],
+        "grid": {
+          "color": "#00000000"
+        },
+        "legend": {
+          "show": true,
+          "size": 2
+        },
+        "rotateYAxisTitle": true,
+        "xAxis": {
+          "col": 0,
+          "inverted": false
+        },
+        "xAxisExtents": {
+          "min": null,
+          "max": null
+        },
+        "xAxisTitle": {
+          "text": "",
+          "color": "white",
+          "textSize": 2
+        },
+        "yAxisExtents": {
+          "min": null,
+          "max": null
+        },
+        "yAxisTitle": {
+          "text": "Pesos",
+          "color": "#777",
+          "textSize": 1
+        }
+      },
+      "pluginVersion": "8.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "EnTypS2nk"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  id, mensualmed as mm, netomed as nm, netdev as nd\nFROM dttn.train_stdev\nWHERE clase = $clase\nORDER by id;\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Dispersión de ingresos por Ingreso Mensual",
+      "type": "michaeldmoore-scatter-panel"
+    },
+    {
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "id": 10,
+      "options": {
+        "border": {
+          "show": false,
+          "color": "yellow",
+          "size": 1
+        },
+        "fieldSets": [
+          {
+            "col": 1,
+            "color": "#F2495C",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          },
+          {
+            "col": 2,
+            "color": "#73BF69",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          },
+          {
+            "col": 3,
+            "color": "#5794F2",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 2,
+            "lineType": "linear"
+          }
+        ],
+        "grid": {
+          "color": "#00000000"
+        },
+        "legend": {
+          "show": true,
+          "size": 2
+        },
+        "rotateYAxisTitle": true,
+        "xAxis": {
+          "col": 0,
+          "inverted": false
+        },
+        "xAxisExtents": {
+          "min": null,
+          "max": null
+        },
+        "xAxisTitle": {
+          "text": "",
+          "color": "white",
+          "textSize": 2
+        },
+        "yAxisExtents": {
+          "min": null,
+          "max": null
+        },
+        "yAxisTitle": {
+          "text": "Pesos",
+          "color": "#777",
+          "textSize": 1
+        }
+      },
+      "pluginVersion": "8.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "EnTypS2nk"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  id, anualmed as am, netomed as nm, netdev as nd\nFROM dttn.train_stdev\nWHERE clase = $clase\nORDER by id;\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Dispersión de ingresos por Ingreso Anual",
+      "type": "michaeldmoore-scatter-panel"
+    },
+    {
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 18
+      },
+      "id": 12,
+      "options": {
+        "border": {
+          "show": false,
+          "color": "yellow",
+          "size": 1
+        },
+        "fieldSets": [
+          {
+            "col": 1,
+            "color": "#F2495C",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          },
+          {
+            "col": 2,
+            "color": "#73BF69",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 3,
+            "lineType": "linear"
+          },
+          {
+            "col": 3,
+            "color": "#5794F2",
+            "dotSize": 2,
+            "hidden": false,
+            "lineSize": 2,
+            "lineType": "linear"
+          }
+        ],
+        "grid": {
+          "color": "#00000000"
+        },
+        "legend": {
+          "show": true,
+          "size": 2
+        },
+        "rotateYAxisTitle": true,
+        "xAxis": {
+          "col": 0,
+          "inverted": false
+        },
+        "xAxisExtents": {
+          "min": null,
+          "max": null
+        },
+        "xAxisTitle": {
+          "text": "",
+          "color": "white",
+          "textSize": 2
+        },
+        "yAxisExtents": {
+          "min": null,
+          "max": null
+        },
+        "yAxisTitle": {
+          "text": "Pesos",
+          "color": "#777",
+          "textSize": 1
+        }
+      },
+      "pluginVersion": "8.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "EnTypS2nk"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  id, netdev as nd, netomed as nm\nFROM dttn.train_stdev\nWHERE clase = $clase\nORDER by id;\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Dispersión de ingresos Totales Netos",
+      "type": "michaeldmoore-scatter-panel"
+    }
+  ],
+  "schemaVersion": 33,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "0",
+          "value": "0"
+        },
+        "definition": "SELECT clase FROM dttn.trainsetclases;",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "clase",
+        "options": [],
+        "query": "SELECT clase FROM dttn.trainsetclases;",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 3,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "conclusion",
+          "value": "conclusion"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "ingreso",
+        "options": [
+          {
+            "selected": false,
+            "text": "mensual",
+            "value": "mensual"
+          },
+          {
+            "selected": false,
+            "text": "anual",
+            "value": "anual"
+          },
+          {
+            "selected": true,
+            "text": "conclusion",
+            "value": "conclusion"
+          }
+        ],
+        "query": "mensual, anual, conclusion",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Ingresos",
+  "uid": "TrQI0S2nz",
+  "version": 11,
+  "weekStart": ""
+}
